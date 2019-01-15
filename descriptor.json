@@ -1,0 +1,254 @@
+{
+    "name": "LandmarkDetect-ML-MSET-Train",
+    "container-image": {
+        "image": "cytomineuliege/s_landmarkdetect-ml-mset-train",
+        "type": "singularity"
+    },
+    "schema-version": "cytomine-0.1",
+    "description": "optional description",
+    "command-line": "python run.py CYTOMINE_HOST CYTOMINE_PUBLIC_KEY CYTOMINE_PRIVATE_KEY CYTOMINE_ID_PROJECT CYTOMINE_ID_SOFTWARE CYTOMINE_TRAINING_IMAGES CYTOMINE_ID_TERMS IMAGE_TYPE MODEL_NJOBS MODEL_R MODEL_RMAX MODEL_P MODEL_NPRED MODEL_NTREES MODEL_NTIMES MODEL_ANGLE MODEL_DEPTH MODEL_STEP MODEL_WSIZE MODEL_FEATURE_TYPE MODEL_FEATURE_HAAR_N MODEL_FEATURE_GAUSSIAN_N MODEL_FEATURE_GAUSSIAN_STD MODEL_SAVE_TO MODEL_NAME VERBOSE",
+    "inputs": [
+        {
+        	"id": "cytomine_host",
+      		"value-key": "[@ID]",
+      		"command-line-flag": "--@id",
+      		"name": "Cytomine host",
+      		"set-by-server": true,
+      		"optional": false,
+      		"type": "String"
+    	},
+    	{
+			"id": "cytomine_public_key",
+			"value-key": "[@ID]",
+			"command-line-flag": "--@id",
+			"name": "Cytomine public key",
+			"set-by-server": true,
+			"optional": false,
+			"type": "String"
+    	},
+    	{
+    		"id": "cytomine_private_key",
+			"value-key": "[@ID]",
+			"command-line-flag": "--@id",
+			"name": "Cytomine private key",
+			"set-by-server": true,
+			"optional": false,
+			"type": "String"
+    	},
+		{
+			"id": "cytomine_id_project",
+			"value-key": "[@ID]",
+			"command-line-flag": "--@id",
+			"name": "Cytomine project ID",
+			"set-by-server": true,
+			"optional": false,
+			"type": "Number"
+    	},
+		{
+			"id": "cytomine_id_software",
+			"value-key": "[@ID]",
+			"command-line-flag": "--@id",
+			"name": "Cytomine software ID",
+			"set-by-server": true,
+			"optional": false,
+			"type": "Number"
+		},
+        {
+            "id": "cytomine_id_project",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "cytomine_id_project",
+            "set-by-server": false,
+            "optional": false,
+            "type": "Number"
+        },
+        {
+            "id": "cytomine_id_terms",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "cytomine_id_terms",
+            "set-by-server": false,
+            "optional": false,
+            "type": "String"
+        },
+        {
+            "id": "cytomine_training_images",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "cytomine_training_images",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":"all",
+            "type": "String"
+        },
+        {
+            "id": "image_type",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "image_type",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":"jpg",
+            "type": "String"
+        },
+        {
+            "id": "model_njobs",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_njobs",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":1,
+            "type": "Number"
+        },
+        {
+            "id": "model_R",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_R",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":6,
+            "type": "Number"
+        },
+        {
+            "id": "model_RMAX",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_RMAX",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":200,
+            "type": "Number"
+        },
+        {
+            "id": "model_P",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_P",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":3,
+            "type": "Number"
+        },
+        {
+            "id": "model_npred",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_npred",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":50000,
+            "type": "Number"
+        },
+        {
+            "id": "model_ntrees",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_ntrees",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":50,
+            "type": "Number"
+        },
+        {
+            "id": "model_ntimes",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_ntimes",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":3,
+            "type": "Number"
+        },
+        {
+            "id": "model_angle",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_angle",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":30,
+            "type": "Number"
+        },
+        {
+            "id": "model_depth",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_depth",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":5,
+            "type": "Number"
+        },
+        {
+            "id": "model_step",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_step",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":1,
+            "type": "Number"
+        },
+        {
+            "id": "model_wsize",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_wsize",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":8,
+            "type": "Number"
+        },
+        {
+            "id": "model_feature_type",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_feature_type",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":"sub",
+            "type": "String"
+        },
+        {
+            "id": "model_feature_haar_n",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_feature_haar_n",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":1600,
+            "type": "Number"
+        },
+        {
+            "id": "model_feature_gaussian_n",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_feature_gaussian_n",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":1600,
+            "type": "Number"
+        },
+        {
+            "id": "model_feature_gaussian_std",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "model_feature_gaussian_std",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":20,
+            "type": "Number"
+        },
+        {
+            "id": "verbose",
+            "value-key": "[@ID]",
+            "command-line-flag": "--@id",
+            "name": "verbose",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":"0",
+            "type": "String"
+        }]
+}
