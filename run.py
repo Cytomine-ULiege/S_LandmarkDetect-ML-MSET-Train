@@ -122,7 +122,9 @@ def main():
 		#leprogres = 10
 		#pr_spacing = 90/len(term_list)
 		#print(term_list)
+		sfinal = ""
 		for id_term in term_list:
+			sfinal+="%d "%id_term
 			#leprogres += pr_spacing
 			#conn.job.update(progress=leprogres, statusComment="Building model for annotation %d"%id_term)
 
@@ -230,7 +232,7 @@ def main():
 					domainClassName="be.cytomine.processing.Job"
 				).upload()
 
-
+		Property(conn.job, key="id_terms", value=sfinal.rstrip(" ")).save()
 		conn.job.update(progress=100, status=Job.TERMINATED, statusComment="Job terminated.")
 
 if __name__ == "__main__":
