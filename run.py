@@ -198,31 +198,32 @@ def main():
 			parameters_hash['feature_gaussian_std'] = conn.parameters.model_feature_gaussian_std
 			parameters_hash['image_type'] = conn.parameters.image_type
 
-			model_filename = joblib.dump(clf, os.path.join(out_path, '%d_model.joblib' % (id_term)))
-			cov_filename = joblib.dump([mx, my, cm], os.path.join(out_path, '%d_cov.joblib' % (id_term)))
-			parameter_filename = joblib.dump(parameters_hash, os.path.join(out_path, '%d_parameters.joblib' % id_term))
+			model_filename = joblib.dump(clf, os.path.join(out_path, '%d_model.joblib' % (id_term)), compress=3)[0]
+			cov_filename = joblib.dump([mx, my, cm], os.path.join(out_path, '%d_cov.joblib' % (id_term)), compress=3)[0]
+			parameter_filename = joblib.dump(parameters_hash, os.path.join(out_path, '%d_parameters.joblib' % id_term), compress=3)[0]
 
+			print('uploading the first', model_filename)
 			AttachedFile(
 				conn.job,
 				domainIdent=conn.job.id,
-				filename=model_filename[0],
+				filename=model_filename,
 				domainClassName="be.cytomine.processing.Job"
 			).upload()
-
+			print('uploading the second')
 			AttachedFile(
 				conn.job,
 				domainIdent=conn.job.id,
 				filename=cov_filename[0],
 				domainClassName="be.cytomine.processing.Job"
 			).upload()
-
+			print('uploading the third')
 			AttachedFile(
 				conn.job,
 				domainIndent=conn.job.id,
 				filename=parameter_filename[0],
 				domainClassName="be.cytomine.processing.Job"
-			)
-
+			).upload()
+			print('i finished')
 			if conn.parameters.model_feature_type == 'haar' or conn.parameters.model_feature_type == 'gaussian':
 				add_filename = joblib.dump(feature_parameters, out_path.rstrip('/')+'/'+'%d_fparameters.joblib' % (id_term))
 				AttachedFile(
