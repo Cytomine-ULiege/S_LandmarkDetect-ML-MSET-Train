@@ -25,7 +25,7 @@ from ldmtools import *
 import sys
 import scipy.ndimage as snd
 from multiprocessing import Pool
-from cytomine import CytomineJob
+from cytomine import CytomineJob, Cytomine
 from download import *
 from cytomine.models import Annotation, Job, ImageInstanceCollection, AnnotationCollection, Property, AttachedFileCollection, AttachedFile
 from sklearn.ensemble import ExtraTreesClassifier
@@ -202,34 +202,30 @@ def main():
 			cov_filename = joblib.dump([mx, my, cm], os.path.join(out_path, '%d_cov.joblib' % (id_term)), compress=3)[0]
 			parameter_filename = joblib.dump(parameters_hash, os.path.join(out_path, '%d_parameters.joblib' % id_term), compress=3)[0]
 
-			print('uploading the first', model_filename)
 			AttachedFile(
 				conn.job,
 				domainIdent=conn.job.id,
 				filename=model_filename,
 				domainClassName="be.cytomine.processing.Job"
 			).upload()
-			print('uploading the second')
 			AttachedFile(
 				conn.job,
 				domainIdent=conn.job.id,
-				filename=cov_filename[0],
+				filename=cov_filename,
 				domainClassName="be.cytomine.processing.Job"
 			).upload()
-			print('uploading the third')
 			AttachedFile(
 				conn.job,
 				domainIndent=conn.job.id,
-				filename=parameter_filename[0],
+				filename=parameter_filename,
 				domainClassName="be.cytomine.processing.Job"
 			).upload()
-			print('i finished')
 			if conn.parameters.model_feature_type == 'haar' or conn.parameters.model_feature_type == 'gaussian':
-				add_filename = joblib.dump(feature_parameters, out_path.rstrip('/')+'/'+'%d_fparameters.joblib' % (id_term))
+				add_filename = joblib.dump(feature_parameters, out_path.rstrip('/')+'/'+'%d_fparameters.joblib' % (id_term))[0]
 				AttachedFile(
 					conn.job,
 					domainIdent=conn.job.id,
-					filename=add_filename[0],
+					filename=add_filename,
 					domainClassName="be.cytomine.processing.Job"
 				).upload()
 
