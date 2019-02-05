@@ -126,7 +126,7 @@ def main():
 		for id_term in term_list:
 			sfinal+="%d "%id_term
 			#leprogres += pr_spacing
-			#conn.job.update(progress=leprogres, statusComment="Building model for annotation %d"%id_term)
+			conn.job.update(progress=0, statusComment="Building model for annotation %d"%id_term)
 
 			(xc, yc, xr, yr) = getcoordsim(in_txt, id_term, tr_im)
 			nimages = np.max(xc.shape)
@@ -201,7 +201,7 @@ def main():
 			model_filename = joblib.dump(clf, os.path.join(out_path, '%d_model.joblib' % (id_term)), compress=3)[0]
 			cov_filename = joblib.dump([mx, my, cm], os.path.join(out_path, '%d_cov.joblib' % (id_term)), compress=3)[0]
 			parameter_filename = joblib.dump(parameters_hash, os.path.join(out_path, '%d_parameters.joblib' % id_term), compress=3)[0]
-
+			conn.job.update(progress=0, statusComment="Uploading model for annotation %d" % id_term)
 			AttachedFile(
 				conn.job,
 				domainIdent=conn.job.id,
