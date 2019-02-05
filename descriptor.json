@@ -100,7 +100,7 @@
             "name": "Radius RMAX",
             "set-by-server": false,
             "optional": false,
-            "default-value":200,
+            "default-value":100,
             "type": "Number"
         },
         {
@@ -150,7 +150,7 @@
             "name": "Number of rotated versions per image Nt",
             "set-by-server": false,
             "optional": false,
-            "default-value":3,
+            "default-value":1,
             "type": "Number"
         },
         {
@@ -160,7 +160,7 @@
             "name": "Max angle for rotated versions",
             "set-by-server": false,
             "optional": false,
-            "default-value":30,
+            "default-value":0,
             "type": "Number"
         },
         {
@@ -200,7 +200,7 @@
             "name": "Type of pixel descriptor",
             "set-by-server": false,
             "optional": false,
-            "default-value":"sub",
+            "default-value":"raw",
             "type": "String"
         },
         {
