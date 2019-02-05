@@ -6,7 +6,7 @@
     },
     "schema-version": "cytomine-0.1",
     "description": "Training phase of the MSET Landmark Detection Algorithm",
-    "command-line": "python run.py CYTOMINE_HOST CYTOMINE_PUBLIC_KEY CYTOMINE_PRIVATE_KEY CYTOMINE_ID_PROJECT CYTOMINE_ID_SOFTWARE CYTOMINE_TRAINING_IMAGES CYTOMINE_ID_TERMS IMAGE_TYPE MODEL_NJOBS MODEL_R MODEL_RMAX MODEL_P MODEL_NPRED MODEL_NTREES MODEL_NTIMES MODEL_ANGLE MODEL_DEPTH MODEL_STEP MODEL_WSIZE MODEL_FEATURE_TYPE MODEL_FEATURE_HAAR_N MODEL_FEATURE_GAUSSIAN_N MODEL_FEATURE_GAUSSIAN_STD MODEL_SAVE_TO MODEL_NAME VERBOSE",
+    "command-line": "python run.py CYTOMINE_HOST CYTOMINE_PUBLIC_KEY CYTOMINE_PRIVATE_KEY CYTOMINE_ID_PROJECT CYTOMINE_ID_SOFTWARE CYTOMINE_TRAINING_IMAGES CYTOMINE_ID_TERMS IMAGE_TYPE MODEL_NJOBS MODEL_RMAX MODEL_R MODEL_P MODEL_NPRED MODEL_NTREES MODEL_NTIMES MODEL_ANGLE MODEL_DEPTH MODEL_STEP MODEL_WSIZE MODEL_FEATURE_TYPE MODEL_FEATURE_HAAR_N MODEL_FEATURE_GAUSSIAN_N MODEL_FEATURE_GAUSSIAN_STD MODEL_SAVE_TO MODEL_NAME VERBOSE",
     "inputs": [
         {
         	"id": "cytomine_host",
@@ -94,16 +94,6 @@
             "type": "Number"
         },
         {
-            "id": "model_R",
-            "value-key": "@ID",
-            "command-line-flag": "--@id",
-            "name": "Radius R",
-            "set-by-server": false,
-            "optional": false,
-            "default-value":6,
-            "type": "Number"
-        },
-        {
             "id": "model_RMAX",
             "value-key": "@ID",
             "command-line-flag": "--@id",
@@ -111,6 +101,16 @@
             "set-by-server": false,
             "optional": false,
             "default-value":200,
+            "type": "Number"
+        },
+        {
+            "id": "model_R",
+            "value-key": "@ID",
+            "command-line-flag": "--@id",
+            "name": "Radius R",
+            "set-by-server": false,
+            "optional": false,
+            "default-value":6,
             "type": "Number"
         },
         {
