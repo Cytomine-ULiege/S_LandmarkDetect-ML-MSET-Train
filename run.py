@@ -67,7 +67,7 @@ def main():
 		terms = {}
 
 		for image in images:
-			image.dump(dest_pattern=in_path.rstrip('/')+'/%d.%s'%(image.id, conn.parameters.image_type))
+			image.dump(dest_pattern=in_path.rstrip('/')+'/%d.%s'%(image.id, 'jpg'))
 
 			annotations = AnnotationCollection()
 			annotations.project = conn.parameters.cytomine_id_project
@@ -123,10 +123,8 @@ def main():
 		#pr_spacing = 90/len(term_list)
 		#print(term_list)
 		sfinal = ""
-		for id_term in term_list:
+		for id_term in conn.monitor(term_list, start=10, end=90, period=0.05, prefix="Model building for terms..."):
 			sfinal+="%d "%id_term
-			#leprogres += pr_spacing
-			conn.job.update(progress=0, statusComment="Building model for annotation %d"%id_term)
 
 			(xc, yc, xr, yr) = getcoordsim(in_txt, id_term, tr_im)
 			nimages = np.max(xc.shape)
@@ -158,7 +156,7 @@ def main():
 				else:
 					rangrange = conn.parameters.model_angle
 
-				T = build_datasets_rot_mp(in_path, tr_im, xc, yc, conn.parameters.model_R, conn.parameters.model_RMAX, conn.parameters.model_P, conn.parameters.model_step, rangrange, conn.parameters.model_wsize, conn.parameters.model_feature_type, feature_parameters, depths, nimages, conn.parameters.image_type, conn.parameters.model_njobs)
+				T = build_datasets_rot_mp(in_path, tr_im, xc, yc, conn.parameters.model_R, conn.parameters.model_RMAX, conn.parameters.model_P, conn.parameters.model_step, rangrange, conn.parameters.model_wsize, conn.parameters.model_feature_type, feature_parameters, depths, nimages, 'jpg', conn.parameters.model_njobs)
 				for i in range(len(T)):
 					(data, rep, img) = T[i]
 					(height, width) = data.shape
@@ -196,12 +194,10 @@ def main():
 			parameters_hash['feature_haar_n'] = conn.parameters.model_feature_haar_n
 			parameters_hash['feature_gaussian_n'] = conn.parameters.model_feature_gaussian_n
 			parameters_hash['feature_gaussian_std'] = conn.parameters.model_feature_gaussian_std
-			parameters_hash['image_type'] = conn.parameters.image_type
 
 			model_filename = joblib.dump(clf, os.path.join(out_path, '%d_model.joblib' % (id_term)), compress=3)[0]
 			cov_filename = joblib.dump([mx, my, cm], os.path.join(out_path, '%d_cov.joblib' % (id_term)), compress=3)[0]
 			parameter_filename = joblib.dump(parameters_hash, os.path.join(out_path, '%d_parameters.joblib' % id_term), compress=3)[0]
-			conn.job.update(progress=0, statusComment="Uploading model for annotation %d" % id_term)
 			AttachedFile(
 				conn.job,
 				domainIdent=conn.job.id,
